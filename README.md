@@ -21,7 +21,7 @@ to $9.67, equivalent to about 38 GPU hours of processing, training and fine-tuni
 
 From left to right: my phone recording, the same segment with generated robot
 motion, and a separate successful robot attempt from the initial experiment.
-Playback timing is adjusted for the preview.
+The clips are not synchronised, and the LIBERO rollout appears faster than the other two.
 
 ## Approach
 
