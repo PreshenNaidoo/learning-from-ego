@@ -1,0 +1,14 @@
+# Python 3.12, Linux
+# LeRobot supplies compatible PyTorch and simulator dependencies.
+lerobot[libero,smolvla,training]==0.6.1
+hf-libero==0.1.4
+numpy==2.2.6
+gymnasium==1.3.0
+imageio==2.38.0
+imageio-ffmpeg==0.6.0
+h5py==3.16.0
+
+# Human-video processing and plots
+mediapipe==1.0.1
+pandas==2.3.3
+matplotlib==3.11.2
