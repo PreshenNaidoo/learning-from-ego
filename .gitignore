@@ -1,0 +1,33 @@
+# Local Python environment and caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# Local settings and credentials
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+.DS_Store
+
+# Downloaded dependencies and large local assets
+/libero_source/
+/data/
+/models/
+/videos/
+/results/
+/checkpoints/
+/wandb/
+
+/archive/
+
+# Unfinished hand-coded task development
+/experiments/handcoded_task_2.py
+/experiments/handcoded_task_8.py
+
+# The README uses the GIF preview
+/docs/assets/learning-from-ego.mp4
