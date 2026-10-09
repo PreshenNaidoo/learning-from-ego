@@ -8,6 +8,8 @@ myself picking up a bowl and placing it on a plate. I converted these recordings
 into robot images and movement data to train a vision-language-action (VLA)
 model, which takes images, an instruction and the robot's state to predict actions.
 
+[View my original smartphone recordings on Google Drive](https://drive.google.com/drive/folders/1_qfCVt0DsNNct47sBkigbv2mTtqOswg7?usp=sharing).
+
 With only 5 days for this, I focused on a small investigation into whether 
 human videos could help a robot learn a bowl-placement task. I used an affordable 
 cloud GPU to meet the 24 GB VRAM requirement and kept the total GPU rental cost 
