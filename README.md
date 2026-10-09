@@ -216,9 +216,10 @@ tools into an experiment using my own recordings. I compare additional VLA
 training on those recordings followed by robot fine-tuning against robot-only
 fine-tuning.
 
-- [SmolVLA paper](https://arxiv.org/abs/2506.01844) and [LeRobot](https://github.com/huggingface/lerobot)
-- [HuRo](https://github.com/3587jjh/HuRo): human-video reconstruction, retargeting and robot rendering
-- [LIBERO](https://github.com/Lifelong-Robot-Learning/LIBERO): robot demonstrations and simulation
+- [SmolVLA paper](https://arxiv.org/abs/2506.01844)
+- [LeRobot](https://github.com/huggingface/lerobot)
+- [HuRo: Robotizing Human Videos for Scalable VLA Pretraining](https://arxiv.org/abs/2609.10706)
+- [LIBERO: Benchmarking Knowledge Transfer for Lifelong Robot Learning](https://arxiv.org/abs/2306.03310)
 - [MANO](https://mano.is.tue.mpg.de/): hand models used in reconstruction
 
 See each project's licence for usage terms, including HuRo's third-party dependencies.
