@@ -55,6 +55,8 @@ flowchart LR
 5. **Evaluate task success.** I run the fine-tuned model in LIBERO and count
    how often it successfully places the bowl on the plate.
 
+Note, lerobot/smolvla_base is the general pre-trained base model, which is not yet fine-tuned on LIBERO demonstrations.
+
 ## Dataset and tasks
 
 ### My smartphone recordings
@@ -85,16 +87,16 @@ HuRo generates from them.
 | 8 | Pick up the black bowl next to the plate and place it on the plate. |
 
 A ramekin is a small dish. Each selected task's HDF5 file contains **50 robot
-demonstrations**. In the initial study, I used only task 0's file for fine-tuning
-and evaluated on task 0. In the later study, I combined the files for tasks
+demonstrations**. In the initial study with my 3 egocentric videos for pretraining, I used only task 0's file for fine-tuning
+and evaluated on task 0. In the later study using all 14 egocentric videos for pretraining, I combined the files for tasks
 0, 2 and 8 into **150 robot demonstrations**, fine-tuned on that combined dataset,
 and evaluated each of those three tasks.
 
 ## Experiments
 
 The main comparison is **03: Robot-only** against **04: Human video then robot**.
-Both start from **the same base VLA**, SmolVLA base, and use the same LIBERO
-robot data for fine-tuning. Experiment 04 adds the human-data pre-training stage.
+Both start from the same base VLA, SmolVLA base, and use the same LIBERO
+robot data for fine-tuning. Experiment 04 adds the human-data pre-training stage which pretrains on the retargetted data.
 
 | Experiment | Starting model | Human-data pre-training | LIBERO fine-tuning | Training or evaluation |
 |---|---|---|---|---|
@@ -103,12 +105,12 @@ robot data for fine-tuning. Experiment 04 adds the human-data pre-training stage
 | 03: Robot-only | `lerobot/smolvla_base` | No | Yes | Fine-tuning on LIBERO robot demonstrations |
 | 04: Human video then robot | `lerobot/smolvla_base` | Yes | Yes | Human-data pre-training followed by LIBERO robot fine-tuning |
 
-The Yes/No columns describe training **I performed in this project**. Experiment
-02 was already fine-tuned on LIBERO by its authors and serves as a reference.
+The Yes/No columns describe training I performed in this project. Experiment
+02 uses the original model already fine-tuned on LIBERO by its authors and serves as a reference.
 Experiments 03 and 04 use batch size 16 and training seed 42, with matching
-robot fine-tuning settings. Experiment 04 uses additional compute for pre-training.
+robot fine-tuning settings.
 
-Each task is evaluated over **50 episodes (attempts)**, using a different seed
+Each task is evaluated over **50 episodes**, using a different seed
 for each episode, starting at **42** and ending at **91**. The same seed sequence
 is used across experiments, with a maximum of **342 actions per episode**. This action limit matches the hand-coded
 baseline and differs from the default LIBERO Spatial evaluation limit
@@ -119,28 +121,30 @@ baseline and differs from the default LIBERO Spatial evaluation limit
 ### Three videos, one task
 
 For **03: Robot-only**, I started from SmolVLA base and fine-tuned it for
-**2,000 steps on the 50 original LIBERO demonstrations of task 0**.
-For **04: Human video then robot**, I first trained SmolVLA base for **500 steps
-on the data generated from my original three videos**, then fine-tuned that
+2,000 steps on the 50 original LIBERO demonstrations of task 0.
+For **04: Human video then robot**, I first trained SmolVLA base for 500 steps
+on the data generated from my original three videos, then fine-tuned that
 checkpoint on the same 50 LIBERO demonstrations for the same 2,000 steps.
 Both models were evaluated on task 0.
 
-| Experiment | Successes | Success rate |
+| Experiment | Successes | Success rate (Task 0 only) |
 |---|---:|---:|
 | 01: Hand-coded baseline | 36/50 | 72% |
 | 03: Robot-only | 41/50 | 82% |
 | 04: Human video then robot | 44/50 | **88%** |
 
+Overall success was improved using a smaller set focused on one specific libero task.
+
 ### Larger dataset, three tasks
 
-For **03: Robot-only**, I fine-tuned SmolVLA base for **6,000 steps total** on
-the combined **150 original LIBERO demonstrations from tasks 0, 2 and 8**.
-For **04: Human video then robot**, I first trained SmolVLA base on the data
+For experiment **03: Robot-only**, I fine-tuned SmolVLA base for 6,000 steps total on
+the combined 150 original LIBERO demonstrations from tasks 0, 2 and 8.
+For experiment 04: Human video then robot, I first trained SmolVLA base on the retargeted data
 from my 14 usable recordings, then fine-tuned each resulting checkpoint for
 **6,000 steps total on that same combined LIBERO dataset**.
 
 The table shows two human pre-training durations, 500 and 5,000 steps. All
-models were evaluated on each of the three tasks. **02: Published LIBERO model**
+models were evaluated on each of the three tasks. Experiment **02: Published LIBERO model**
 was evaluated as downloaded, without either training stage in this project.
 
 | Experiment | Human training steps | Task 0 | Task 2 | Task 8 | Overall |
@@ -150,7 +154,7 @@ was evaluated as downloaded, without either training stage in this project.
 | 04: Human video then robot | 500 | 62% | 86% | 38% | 62.0% |
 | 04: Human video then robot | 5,000 | 54% | 76% | 58% | 62.7% |
 
-**Human-data training did not improve overall success in the larger experiment.**
+Human-data training pretraining did not improve overall success downstream.
 Other runs with 1,000, 2,000 and 7,000 human pre-training steps also scored
 below robot-only training.
 
@@ -177,7 +181,7 @@ All experiments use one training seed and 50 evaluation episodes per task.
 - **Movement learned for one robot did not consistently transfer to another.**
   The human-data stage after retargetting used Allex arm and hand movements, while LIBERO uses a
   Franka Panda arm with a two-finger gripper and a different action format. The larger experiments suggest that this
-  pre-training did not provide useful features with no benefit after LIBERO fine-tuning.
+  pre-training did not provide useful features downstream with no benefit after LIBERO fine-tuning.
 - **More human data did not automatically help.** The initial three-video study
   showed an improvement, but human-data pre-training did not beat robot-only
   training overall in the larger three-task study.
@@ -188,10 +192,11 @@ All experiments use one training seed and 50 evaluation episodes per task.
 - **More general instructions did not guarantee better results.** I used “bowl”
   and “plate” consistently and removed colour descriptions to make the
   instructions applicable to different scenes and layouts, but the revised
-  instructions reduced success in the run I tested.
+  instructions reduced success in the run I tested. This was my attempt to make
+  the prompts more abstract.
 - **Training schedules matter.** A checkpoint halfway through a longer run is
   not equivalent to a completed shorter run because the learning rate follows
-  a different schedule. I used separate completed runs when comparing training durations.
+  a different schedule in LeRobot. I used separate completed runs when comparing training durations.
 - **Good-looking robot videos are not enough to judge the data.** Rendered
   movements can look convincing while still containing errors in the estimated
   joint positions or their alignment with the images.
@@ -221,5 +226,6 @@ fine-tuning.
 - [HuRo: Robotizing Human Videos for Scalable VLA Pretraining](https://arxiv.org/abs/2609.10706)
 - [LIBERO: Benchmarking Knowledge Transfer for Lifelong Robot Learning](https://arxiv.org/abs/2306.03310)
 - [MANO](https://mano.is.tue.mpg.de/): hand models used in reconstruction
+- [EgoVLA paper](https://arxiv.org/abs/2507.12440)
 
 See each project's licence for usage terms, including HuRo's third-party dependencies.
