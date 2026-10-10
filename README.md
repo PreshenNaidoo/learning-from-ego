@@ -147,7 +147,7 @@ The table shows two human pre-training durations, 500 and 5,000 steps. All
 models were evaluated on each of the three tasks. Experiment **02: Published LIBERO model**
 was evaluated as downloaded, without either training stage in this project.
 
-| Experiment | Human training steps | Task 0 | Task 2 | Task 8 | Overall |
+| Experiment | Pretraining steps | Task 0 | Task 2 | Task 8 | Overall |
 |---|---:|---:|---:|---:|---:|
 | 02: Published LIBERO model | None | 68% | 80% | 76% | 74.7% |
 | 03: Robot-only | 0 | 80% | 84% | 38% | **67.3%** |
