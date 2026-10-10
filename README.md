@@ -155,28 +155,27 @@ was evaluated as downloaded, without either training stage in this project.
 | 04: Human video then robot | 5,000 | 54% | 76% | 58% | 62.7% |
 
 Human-data training pretraining did not improve overall success downstream.
-Other runs with 1,000, 2,000 and 7,000 human pre-training steps also scored
+Other runs with 1,000, 2,000 and 7,000 pre-training steps also scored
 below robot-only training. The published libero model was trained on the entire
 libero dataset for all tasks for 20000 steps, a much higher training budget compared
 to experiments 03 and 04. 
 
 ### Ablations
 
-- Reprocessing the original three videos reduced task-0 success from 88% to 76%.
+- Reprocessing the original three videos again reduced task-0 success from 88% to 76%.
   Restoring their original instructions gave 78%, and restoring their original
-  images as well gave 82% while retaining the reprocessed movements.
+  images as well gave 82% while retaining the reprocessed movements. This shows Huro's
+  retargetting inconsistency.
 - Combining the original three demonstrations with the other new recordings
   gave 55.3% across three tasks, compared with 62.0% for all-reprocessed data
   at the same 500 human and 6,000 robot steps.
-- Rewriting instructions to use “bowl” and “plate” consistently gave 50.7% at
+- Rewriting instructions on my pre-training data to use “bowl” and “plate” instead of other words like container or dish, gave 50.7% at
   the same number of training steps. The edits also required lifting and placing in every label,
   including one that had previously described only reaching and lifting.
 
-The results suggest that generated data quality matters, but these comparisons
-do not establish which processing changes caused the differences. More data,
-longer pre-training and simpler instructions did not consistently improve results.
+The results suggest that generated/retargetted data quality matters. Longer pre-training and generic instructions did not consistently improve results.
 
-All experiments use one training seed and 50 evaluation episodes per task.
+All experiments use the same seed for training and 50 evaluation episodes per task.
 
 ## What I learned
 
