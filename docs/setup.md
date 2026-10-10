@@ -12,16 +12,14 @@ at `/workspace/learning-from-ego`. Commands run on that machine unless marked
 On another Linux machine, use `sudo` for package installation and change the
 `/workspace` paths if needed.
 
-You need an NVIDIA GPU with at least 24 GB memory and about 150–200 GB of disk
-space. This project used an RTX 3090. HuRo alone used about 70 GB during setup.
+You need an NVIDIA GPU with at least 24 GB memory and about 100-150 GB of disk
+space. This project used an RTX 3090. HuRo alone used about 60-70 GB during setup.
 Use storage that supports normal Linux permissions and symbolic links.
 
-The repository contains code and documentation. Recordings, prepared datasets
-and checkpoints are not included. You can run Experiments 01–03 using public
+The repository contains code and documentation. You can run Experiments 01–03 using public
 models and LIBERO data. For Experiment 04, download
 [my 15 original smartphone recordings](https://drive.google.com/drive/folders/1_qfCVt0DsNNct47sBkigbv2mTtqOswg7?usp=sharing)
-to follow the same 15-video experiment, or use your own recordings. Extract the
-download if Google Drive packages it as a ZIP and keep the original MP4 filenames.
+to follow the same 15-video experiment, or use your own recordings. 
 The HuRo guide below explains how to copy them to the GPU machine and process them.
 Reprocessing the recordings can produce different outputs, so exact scores may vary.
 
