@@ -13,7 +13,7 @@ model, which takes images, an instruction and the robot's state to predict actio
 With only 5 days for this, I focused on a small investigation into whether 
 human videos could help a robot learn a bowl-placement task better. I used an affordable 
 cloud GPU to meet the 24 GB VRAM requirement and kept the total GPU rental cost 
-to $9.67, equivalent to about 38 GPU hours of processing, training and fine-tuning.
+to $9.67, equivalent to about 38 GPU hours of processing, training and fine-tuning across all runs.
 
 ## Demo
 
