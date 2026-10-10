@@ -156,7 +156,9 @@ was evaluated as downloaded, without either training stage in this project.
 
 Human-data training pretraining did not improve overall success downstream.
 Other runs with 1,000, 2,000 and 7,000 human pre-training steps also scored
-below robot-only training.
+below robot-only training. The published libero model was trained on the entire
+libero dataset for all tasks for 20000 steps, a much higher training budget compared
+to experiments 03 and 04. 
 
 ### Ablations
 
