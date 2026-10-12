@@ -124,6 +124,11 @@ baseline and differs from the default LIBERO Spatial evaluation limit
 
 ## Results
 
+The original evaluation JSON files are in [raw_results](raw_results), grouped by
+the initial single-task study, the three-task study and ablations. Filenames
+include training steps where relevant. The files are unchanged, so their video
+paths refer to the original local runs.
+
 ### Three videos, one task
 
 For **03: Robot-only**, I started from SmolVLA base and fine-tuned it for
