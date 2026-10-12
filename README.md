@@ -23,6 +23,12 @@ From left to right: my phone recording, the same segment with generated robot
 motion, and a separate successful robot attempt from the initial experiment.
 The clips are not synchronised, and the LIBERO rollout appears faster than the other two.
 
+![Phone recording, retargeted robot motion, and a successful LIBERO task 2 rollout](docs/assets/learning-from-ego-task-2.gif)
+
+My phone recording alongside its retargeted robot motion and a successful Experiment 04
+rollout on LIBERO task 2, picking up the bowl from the centre of the table and
+placing it on the plate.
+
 ## Approach
 
 The **embodiment gap** is the difference between how humans and robots move.
