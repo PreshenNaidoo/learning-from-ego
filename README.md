@@ -126,8 +126,7 @@ baseline and differs from the default LIBERO Spatial evaluation limit
 
 The original evaluation JSON files are in [raw_results](raw_results), grouped by
 the initial single-task study, the three-task study and ablations. Filenames
-include training steps where relevant. The files are unchanged, so their video
-paths refer to the original local runs.
+include training steps where relevant.
 
 ### Three videos, one task
 
